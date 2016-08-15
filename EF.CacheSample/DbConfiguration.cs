@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace EF.CacheSample
 {
-    //public class Configuration : DbConfiguration
-    //{
-    //    public Configuration()
-    //    {
-    //        var transactionHandler = new CacheTransactionHandler(new InMemoryCache());
+    public class Configuration : DbConfiguration
+    {
+        public Configuration()
+        {
+            var transactionHandler = new CacheTransactionHandler(new InMemoryCache());
 
-    //        AddInterceptor(transactionHandler);
+            AddInterceptor(transactionHandler);
 
-    //        var cachingPolicy = new CachingPolicy();
+            var cachingPolicy = new CachingPolicy();
 
-    //        Loaded +=
-    //          (sender, args) => args.ReplaceService<DbProviderServices>(
-    //            (s, _) => new CachingProviderServices(s, transactionHandler,
-    //              cachingPolicy));
-    //    }
-    //}
+            Loaded +=
+              (sender, args) => args.ReplaceService<DbProviderServices>(
+                (s, _) => new CachingProviderServices(s, transactionHandler,
+                  cachingPolicy));
+        }
+    }
 }
